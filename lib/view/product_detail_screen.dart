@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/product.dart';
+import '../providers/product.dart';
 import 'package:shop/providers/counter_provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {

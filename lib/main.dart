@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'view/products_overview_screen.dart';
 import 'utils/app_routes.dart';
+import './view/cart_screen.dart';
 import 'package:provider/provider.dart';
 import 'view/product_detail_screen.dart';
+import './providers/cart.dart';
 import './providers/products.dart';
 
 void main() => runApp(StoreAPP());
@@ -10,8 +12,15 @@ void main() => runApp(StoreAPP());
 class StoreAPP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => Products(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => Products(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => new Cart(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Minha Loja',
         theme: ThemeData(
@@ -20,7 +29,10 @@ class StoreAPP extends StatelessWidget {
           fontFamily: 'Lato',
         ),
         home: ProductOverviewScreen(),
-        routes: {AppRoutes.PRODUCT_DETAIL: (ctx) => ProductDetailScreen()},
+        routes: {
+          AppRoutes.PRODUCT_DETAIL: (ctx) => ProductDetailScreen(),
+          AppRoutes.CART: (ctx) => CartScreen(),
+        },
       ),
     );
   }
